@@ -1,0 +1,71 @@
+{
+  "mode": "system_design",
+  "criteria": [
+    {
+      "key": "requirements",
+      "label": "Requirements clarification",
+      "anchors": {
+        "1": "Starts drawing boxes with no questions asked.",
+        "2": "States one assumption, never checks scale or constraints.",
+        "3": "Asks about scale, misses non-functional requirements.",
+        "4": "Establishes functional and non-functional requirements before designing.",
+        "5": "Scopes sharply, names what is explicitly out of scope, fixes rough numbers."
+      }
+    },
+    {
+      "key": "high_level_design",
+      "label": "High-level design",
+      "anchors": {
+        "1": "No coherent architecture.",
+        "2": "Components named but the data flow is unclear.",
+        "3": "A workable design with a gap in the path from request to storage.",
+        "4": "Clear components and a complete end-to-end flow.",
+        "5": "Clean design, with the boundary decisions justified as they are made."
+      }
+    },
+    {
+      "key": "data_model",
+      "label": "Data and storage",
+      "anchors": {
+        "1": "No data model.",
+        "2": "Names a database with no reasoning.",
+        "3": "Reasonable schema, no access-pattern reasoning.",
+        "4": "Schema driven by the read and write patterns, indexing considered.",
+        "5": "Storage choice argued from access patterns, with the cost of the choice acknowledged."
+      }
+    },
+    {
+      "key": "scale_and_failure",
+      "label": "Scale and failure modes",
+      "anchors": {
+        "1": "No mention of scale or failure.",
+        "2": "Says 'add a cache' or 'scale horizontally' with no specifics.",
+        "3": "Identifies one bottleneck.",
+        "4": "Identifies bottlenecks and what happens when a dependency fails.",
+        "5": "Reasons about retries, idempotency, backpressure and partial failure concretely."
+      }
+    },
+    {
+      "key": "tradeoffs",
+      "label": "Explicit tradeoffs",
+      "anchors": {
+        "1": "Presents choices as facts with no alternatives.",
+        "2": "Mentions an alternative without comparing.",
+        "3": "Compares two options on one axis.",
+        "4": "States what each choice costs, not only what it buys.",
+        "5": "Names the alternative, the axis, and the condition that would flip the decision."
+      }
+    },
+    {
+      "key": "cost_awareness",
+      "label": "Cost awareness",
+      "anchors": {
+        "1": "No sense that anything costs money.",
+        "2": "Vague acknowledgement that it might be expensive.",
+        "3": "Identifies the expensive component.",
+        "4": "Estimates the dominant cost and proposes a lever to cut it.",
+        "5": "Rough per-unit economics, with a concrete cost-reduction strategy."
+      }
+    }
+  ]
+}

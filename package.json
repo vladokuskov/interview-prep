@@ -1,0 +1,39 @@
+{
+  "name": "interview-prep",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev -H 0.0.0.0",
+    "build": "next build",
+    "start": "next start",
+    "test": "vitest run",
+    "ingest": "tsx scripts/ingest-cv.ts",
+    "seed:stories": "tsx scripts/seed-stories.ts",
+    "import:bank": "tsx scripts/import-bank.ts",
+    "eval:grader": "tsx scripts/eval-grader.ts",
+    "check:bank": "tsx scripts/check-bank.ts"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.127.0",
+    "better-sqlite3": "^13.0.3",
+    "next": "16.3.5",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
+    "react-markdown": "^10.1.0",
+    "remark-gfm": "^4.0.1",
+    "server-only": "^0.0.1",
+    "ts-fsrs": "^5.4.2",
+    "zod": "^4.6.5"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/better-sqlite3": "^9.6.0",
+    "@types/node": "^24.13.6",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "tailwindcss": "^4",
+    "tsx": "^4.23.15",
+    "typescript": "^5",
+    "vitest": "^5.0.1"
+  }
+}

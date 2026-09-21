@@ -1,0 +1,49 @@
+{
+  "mode": "behavioral",
+  "criteria": [
+    {
+      "key": "star_completeness",
+      "label": "STAR completeness",
+      "anchors": {
+        "1": "No structure. A vague claim with no situation or outcome.",
+        "2": "Situation only, or jumps straight to a result with no context.",
+        "3": "Situation and action present, but the result is fuzzy or missing.",
+        "4": "All four parts present, one of them thin.",
+        "5": "Situation, task, action and result are all present and proportionate."
+      }
+    },
+    {
+      "key": "specificity",
+      "label": "Specificity and evidence",
+      "anchors": {
+        "1": "Entirely generic. Could be said by anyone about any job.",
+        "2": "Names a technology but no concrete decision or number.",
+        "3": "One concrete detail, otherwise general.",
+        "4": "Several concrete details, at least one measurable.",
+        "5": "Concrete throughout, with a real number tied to the outcome."
+      }
+    },
+    {
+      "key": "ownership",
+      "label": "Ownership",
+      "anchors": {
+        "1": "Entirely 'we'. The speaker's own contribution is invisible.",
+        "2": "Mostly 'we', with one vague personal claim.",
+        "3": "Mixed, the personal contribution is inferable but not stated.",
+        "4": "Clear 'I' on the main decisions, credits the team appropriately.",
+        "5": "Unmistakable about what the speaker personally did and decided."
+      }
+    },
+    {
+      "key": "conciseness",
+      "label": "Conciseness",
+      "anchors": {
+        "1": "Rambling, no clear end. Well over three minutes of speech.",
+        "2": "Long and repetitive, buries the point.",
+        "3": "Somewhat long but followable.",
+        "4": "Tight, roughly 60-120 seconds spoken.",
+        "5": "Tight and well shaped, lands the point and stops."
+      }
+    }
+  ]
+}

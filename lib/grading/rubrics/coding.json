@@ -1,0 +1,49 @@
+{
+  "mode": "coding",
+  "criteria": [
+    {
+      "key": "correctness",
+      "label": "Correctness",
+      "anchors": {
+        "1": "Does not work on the basic case.",
+        "2": "Basic case only, breaks on anything unusual.",
+        "3": "Works, misses an obvious edge case.",
+        "4": "Works including edge cases.",
+        "5": "Works, and the edge cases were named before they were handled."
+      }
+    },
+    {
+      "key": "complexity",
+      "label": "Complexity awareness",
+      "anchors": {
+        "1": "Cannot state the complexity.",
+        "2": "States it incorrectly.",
+        "3": "States time complexity correctly, ignores space.",
+        "4": "States both correctly.",
+        "5": "States both and explains what dominates at realistic input sizes."
+      }
+    },
+    {
+      "key": "code_quality",
+      "label": "Readability",
+      "anchors": {
+        "1": "Unreadable, single-letter names, no structure.",
+        "2": "Works but hard to follow.",
+        "3": "Readable, some awkward naming.",
+        "4": "Clean, well named, appropriately typed.",
+        "5": "Clean, well typed, and the structure makes the intent obvious."
+      }
+    },
+    {
+      "key": "explanation",
+      "label": "Explaining the solution",
+      "anchors": {
+        "1": "Cannot explain what was written.",
+        "2": "Describes the code line by line without reasoning.",
+        "3": "Explains the approach, stumbles on the why.",
+        "4": "Explains the approach and the reasoning behind it.",
+        "5": "Explains it well enough that a listener could reimplement it."
+      }
+    }
+  ]
+}
