@@ -12,6 +12,7 @@
 import { loadEnv } from '../lib/env'
 import { db, toJson } from '../lib/db'
 import { parseBank, type BankFormat } from '../lib/banks/parse'
+import { pruneCards } from '../lib/scheduler'
 
 loadEnv()
 
@@ -83,6 +84,10 @@ async function main() {
       .prepare(`DELETE FROM bank_cards WHERE bank_id = ? AND ord NOT IN (${keep.map(() => '?').join(',')})`)
       .run(bank.id, ...keep)
     if (stale.changes > 0) console.log(`pruned ${stale.changes} stale cards`)
+
+    const live = (conn.prepare('SELECT id FROM bank_cards').all() as { id: number }[]).map((r) => r.id)
+    const orphaned = pruneCards('bank_card', live)
+    if (orphaned > 0) console.log(`pruned ${orphaned} orphaned review records`)
   })()
 
   const tagCounts = cards

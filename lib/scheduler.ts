@@ -112,3 +112,22 @@ export function masteryStats(refType: RefType, refIds: number[]) {
     pct: Math.round((mastered / refIds.length) * 100),
   }
 }
+
+/**
+ * Drops scheduling state whose target no longer exists.
+ *
+ * This matters because SQLite reassigns rowids after a bulk delete: re-running
+ * a seed script would otherwise let a brand new question inherit the review
+ * history of an unrelated old one, silently corrupting its due date. Seed
+ * scripts call this straight after deleting, before inserting replacements.
+ */
+export function pruneCards(refType: RefType, liveIds: number[]): number {
+  const conn = db()
+  if (liveIds.length === 0) {
+    return conn.prepare('DELETE FROM cards WHERE ref_type = ?').run(refType).changes
+  }
+  const placeholders = liveIds.map(() => '?').join(',')
+  return conn
+    .prepare(`DELETE FROM cards WHERE ref_type = ? AND ref_id NOT IN (${placeholders})`)
+    .run(refType, ...liveIds).changes
+}

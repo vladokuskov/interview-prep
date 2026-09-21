@@ -63,3 +63,20 @@ describe('scheduler', () => {
     expect(stats.mastered).toBeLessThan(3)
   })
 })
+
+describe('pruneCards', () => {
+  it('drops review state for rows that no longer exist, so rowid reuse cannot inherit it', async () => {
+    const { pruneCards } = await import('./scheduler')
+    db().prepare('INSERT INTO bank_cards (id, bank_id, ord, question, answer) VALUES (99, 1, 99, ?, ?)').run('q', 'a')
+    reviewCard('bank_card', 99, Rating.Easy)
+    expect(getOrCreateCard('bank_card', 99).reps).toBe(1)
+
+    db().prepare('DELETE FROM bank_cards WHERE id = 99').run()
+    const live = (db().prepare('SELECT id FROM bank_cards').all() as { id: number }[]).map((r) => r.id)
+    expect(pruneCards('bank_card', live)).toBe(1)
+
+    // A new row reusing id 99 must start from zero, not inherit the old history.
+    db().prepare('INSERT INTO bank_cards (id, bank_id, ord, question, answer) VALUES (99, 1, 99, ?, ?)').run('new', 'a')
+    expect(getOrCreateCard('bank_card', 99).reps).toBe(0)
+  })
+})

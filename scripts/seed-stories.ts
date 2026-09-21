@@ -9,6 +9,7 @@ import { z } from 'zod'
 import { loadEnv } from '../lib/env'
 import { db, parseJson, toJson } from '../lib/db'
 import { llm } from '../lib/llm'
+import { pruneCards } from '../lib/scheduler'
 import type { BulletRow } from '../lib/db/types'
 
 loadEnv()
@@ -39,6 +40,13 @@ async function main() {
 
   conn.prepare('DELETE FROM questions WHERE source = ?').run('from_cv')
   conn.prepare('DELETE FROM stories').run()
+
+  // Scrap the scheduling history too. SQLite reuses rowids after a bulk delete,
+  // so leaving it behind would hand a fresh question someone else's due date.
+  const dropped =
+    pruneCards('question', (conn.prepare('SELECT id FROM questions').all() as { id: number }[]).map((r) => r.id)) +
+    pruneCards('story', [])
+  if (dropped > 0) console.log(`cleared ${dropped} stale review records from the previous seed\n`)
 
   for (const bullet of bullets) {
     const draft = await llm().complete({
